@@ -20,14 +20,17 @@ app.get("/", function (req, res) {
 
 app.post("/", function (req, res) {
     //console.log(req.body.crypto);
-    var crypto = req.body.crypto;
+    var crypto = req.body.crypto; //accesing the value in dropdown menu using body parser that the user chose at runtime
     var fiat =  req.body.fiat;
 
     restClient.getTickerDataPerSymbol('global', crypto+fiat, function(response) {
-        console.log(response);
-        // var data = JSON.parse(response);
-        // var price = data.last;
-        // console.log("your price is" + price);
+        //console.log(response);
+        var data = JSON.parse(response);   //storing the server response in a data var after converting json string i.e server resp into js object
+        var price = data.last;   //accessing the last data using .(dot) in js object
+        var CurrentDate = data.display_timestamp;  //var to store the current date & time
+        res.write("<p>The Current date is " + CurrentDate + "</p>");
+        res.write("<h1>The Current Price of " + crypto + " is " + price + fiat + "</h1>");
+        res.send();
     }, function(error){
         console.log(error);
 
