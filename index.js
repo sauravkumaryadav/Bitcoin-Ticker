@@ -25,10 +25,14 @@ app.post("/", function (req, res) {
     var baseURL = "https://apiv2.bitcoinaverage.com/indices/global/ticker/";
     var finalURL = baseURL + crypto +fiat;
     request(finalURL , function (error, response,body) {
-    //   var x =JSON.stringify(body);
-    console.log("hello");
-    //   console.log(JSON.parse(x));
-    console.log(body);
+    restClient.getTickerDataPerSymbol('global', crypto+fiat, function(response) {
+        console.log(response);
+        // var data = JSON.parse(response);
+        // var price = data.last;
+        // console.log("your price is" + price);
+    }, function(error){
+        console.log(error);
+    }) ;
     });
 });
 app.listen(5000, function () {
