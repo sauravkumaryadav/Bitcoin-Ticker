@@ -43,7 +43,7 @@ app.get("/priceconversion", function (req, res) {
     res.sendFile(__dirname + "/priceconversion.html");
 });
 
-app.post("/priceconversion.html", function (req, res) {
+app.post("/priceconversion", function (req, res) {
 
     var crypto = req.body.crypto; //accesing the value in dropdown menu using body parser that the user chose at runtime
     var fiat = req.body.fiat;
